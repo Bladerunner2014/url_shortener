@@ -24,7 +24,9 @@ def redirect_to_org_link(short_url):
 
     link = Shortdb.query.filter_by(short_url=short_url).first()
     if link:
-        # link.counter++
+        link.counter += 1
+        db.session.commit()
+
         return redirect(f"http://{link.org_url}", code=302)
 
     else:
